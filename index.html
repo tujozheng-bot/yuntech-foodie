@@ -4,13 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>YunEat — Smart Food & Budget Tracker</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
@@ -54,13 +50,11 @@
 </head>
 <body class="pb-20">
 
-    <!-- TOAST NOTIFICATION -->
     <div id="toast" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-full shadow-lg z-50 flex items-center gap-2">
         <i data-lucide="info" class="w-5 h-5"></i>
         <span id="toast-msg">Message</span>
     </div>
 
-    <!-- ONBOARDING & SETUP VIEW -->
     <div id="view-setup" class="min-h-screen p-6 flex flex-col justify-center max-w-md mx-auto hidden-view">
         <div class="text-center mb-8">
             <h1 class="text-3xl font-bold text-brand-orange mb-2">🍱 YunEat</h1>
@@ -145,7 +139,6 @@
             </div>
         </div>
 
-        <!-- AI Goal Result Box -->
         <div id="setup-ai-result" class="hidden mt-6 bg-brand-lightGreen p-5 rounded-2xl border border-brand-green">
             <h3 class="font-bold text-brand-green flex items-center gap-2"><i data-lucide="target" class="w-5 h-5"></i> AI Goal Analysis</h3>
             <p class="text-sm mt-2" id="setup-ai-text"></p>
@@ -163,9 +156,7 @@
         </div>
     </div>
 
-    <!-- MAIN DASHBOARD VIEW -->
     <div id="view-dashboard" class="max-w-md mx-auto hidden-view">
-        <!-- Header -->
         <div class="bg-brand-orange text-white p-6 rounded-b-[2.5rem] shadow-md">
             <div class="flex justify-between items-start">
                 <div>
@@ -176,7 +167,6 @@
                 <button onclick="resetApp()" class="p-2 bg-white/20 rounded-full hover:bg-white/30"><i data-lucide="settings" class="w-5 h-5"></i></button>
             </div>
 
-            <!-- Budget Card -->
             <div class="bg-white text-gray-800 p-4 rounded-2xl mt-6 shadow-sm">
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-sm font-semibold text-gray-500 flex items-center gap-1"><i data-lucide="wallet" class="w-4 h-4"></i> Today's Budget</span>
@@ -186,7 +176,6 @@
                     <span class="text-3xl font-bold text-brand-orange" id="dash-spent">0</span>
                     <span class="text-sm text-gray-500 mb-1">/ <span id="dash-daily-limit">200</span> TWD</span>
                 </div>
-                <!-- Mini Progress Bar -->
                 <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
                     <div class="bg-brand-orange h-2 rounded-full" id="dash-budget-bar" style="width: 0%"></div>
                 </div>
@@ -194,11 +183,9 @@
         </div>
 
         <div class="p-4 space-y-6">
-            <!-- Nutrition Summary -->
             <div>
                 <h2 class="text-lg font-bold flex items-center gap-2 mb-3">🔥 Nutrition Today</h2>
                 <div class="grid grid-cols-2 gap-4">
-                    <!-- Calories Ring -->
                     <div class="bg-white p-4 rounded-2xl shadow-sm text-center flex flex-col items-center">
                         <svg viewBox="0 0 36 36" class="circular-chart text-brand-orange w-24 h-24">
                             <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
@@ -208,7 +195,6 @@
                         </svg>
                         <p class="text-xs text-gray-500 mt-2">Goal: <span id="goal-cal">2000</span></p>
                     </div>
-                    <!-- Protein Ring -->
                     <div class="bg-white p-4 rounded-2xl shadow-sm text-center flex flex-col items-center">
                         <svg viewBox="0 0 36 36" class="circular-chart text-blue-500 w-24 h-24">
                             <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
@@ -221,7 +207,6 @@
                 </div>
             </div>
 
-            <!-- Action Buttons -->
             <div class="flex gap-3">
                 <button onclick="openModal('add-food-modal')" class="flex-1 bg-brand-orange text-white py-4 rounded-2xl font-bold shadow-md hover:bg-orange-600 flex flex-col items-center justify-center gap-1 transition">
                     <i data-lucide="scan-line" class="w-6 h-6"></i>
@@ -233,7 +218,6 @@
                 </button>
             </div>
 
-            <!-- AI Recommendations Container (Hidden by default) -->
             <div id="recs-container" class="hidden">
                 <h2 class="text-lg font-bold flex items-center gap-2 mb-3">🤖 AI Douliu Recommendations</h2>
                 <div id="recs-loading" class="text-center py-4 hidden">
@@ -243,16 +227,13 @@
                 <div id="recs-list" class="space-y-3"></div>
             </div>
 
-            <!-- Today's Log -->
             <div>
                 <h2 class="text-lg font-bold flex items-center gap-2 mb-3">🍱 Today's Log</h2>
                 <div class="bg-white rounded-2xl shadow-sm overflow-hidden" id="food-log-list">
-                    <!-- Items populated via JS -->
                     <div class="p-4 text-center text-sm text-gray-400 italic">No food logged yet today.</div>
                 </div>
             </div>
 
-            <!-- Charts -->
             <div>
                 <h2 class="text-lg font-bold flex items-center gap-2 mb-3">📊 Weekly Overview</h2>
                 <div class="bg-white p-4 rounded-2xl shadow-sm mb-4">
@@ -260,7 +241,6 @@
                 </div>
             </div>
             
-            <!-- BMI Status Box -->
             <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-2xl shadow-sm border border-blue-100">
                 <h3 class="font-bold text-blue-800 flex items-center gap-2 mb-2"><i data-lucide="activity" class="w-4 h-4"></i> Fitness Journey</h3>
                 <p class="text-sm text-blue-900" id="dash-bmi-advice">Keep pushing towards your goals!</p>
@@ -268,7 +248,6 @@
         </div>
     </div>
 
-    <!-- ADD FOOD MODAL -->
     <div id="add-food-modal" class="fixed inset-0 bg-black/60 z-40 hidden flex items-end sm:items-center justify-center">
         <div class="bg-white w-full max-w-md rounded-t-[2rem] sm:rounded-2xl p-6 h-[85vh] sm:h-auto overflow-y-auto transform transition-transform translate-y-full sm:translate-y-0 duration-300" id="modal-content">
             <div class="flex justify-between items-center mb-6">
@@ -276,13 +255,11 @@
                 <button onclick="closeModal('add-food-modal')" class="p-2 bg-gray-100 rounded-full text-gray-600"><i data-lucide="x" class="w-5 h-5"></i></button>
             </div>
 
-            <!-- Tabs -->
             <div class="flex bg-gray-100 rounded-xl p-1 mb-6">
                 <button onclick="switchTab('scan')" id="tab-btn-scan" class="flex-1 py-2 text-sm font-semibold rounded-lg bg-white shadow text-brand-orange">📷 Scan Food</button>
                 <button onclick="switchTab('manual')" id="tab-btn-manual" class="flex-1 py-2 text-sm font-semibold rounded-lg text-gray-500">✍️ Manual Text</button>
             </div>
 
-            <!-- Scan Tab -->
             <div id="tab-scan" class="space-y-4">
                 <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center cursor-pointer hover:bg-gray-50 transition relative overflow-hidden">
                     <input type="file" id="food-image" accept="image/*" capture="environment" class="absolute inset-0 opacity-0 cursor-pointer z-10" onchange="previewImage(event)">
@@ -294,7 +271,6 @@
                 </div>
             </div>
 
-            <!-- Manual Tab -->
             <div id="tab-manual" class="hidden space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700">What did you eat?</label>
@@ -302,7 +278,6 @@
                 </div>
             </div>
 
-            <!-- Common Inputs -->
             <div class="mt-4 space-y-4">
                 <div class="grid grid-cols-2 gap-4">
                     <div>
@@ -321,13 +296,11 @@
                     <i data-lucide="sparkles" class="w-5 h-5"></i> Analyze with AI
                 </button>
 
-                <!-- Loading State -->
                 <div id="analysis-loading" class="hidden py-4 text-center">
                     <div class="loader"></div>
                     <p class="text-sm text-gray-500 mt-2">AI is breaking down ingredients & macros...</p>
                 </div>
 
-                <!-- Analysis Result (Hidden initially) -->
                 <div id="analysis-result" class="hidden bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4 text-sm">
                     <div class="flex justify-between items-start mb-3 border-b pb-2">
                         <span id="res-safety-badge" class="px-2 py-1 rounded text-xs font-bold text-white bg-green-500">✅ Diet Safe</span>
@@ -354,14 +327,13 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
         // Initialize Icons
         lucide.createIcons();
 
         // --- CONSTANTS & API ---
-        const API_KEY = "AIzaSyAN7ZQfzfClNCnleJhlan0PfLKZOxsoX0k"; // Environment handles this
-        const MODEL_TEXT = "gemini-2.5-flash";
+        const API_KEY = "AQ.Ab8RN6KQzR85a15SCYMr5Cr3t7F9Xqe1v2lBTPWS_G2PiyTe1w"; // Insert your AQ key here
+        const MODEL_TEXT = "gemini-1.5-flash";
         
         // --- STATE ---
         let userProfile = JSON.parse(localStorage.getItem('yuneat_profile')) || null;
@@ -381,7 +353,8 @@
 
         // --- HELPER: API CALLS WITH BACKOFF ---
         async function fetchGemini(payload) {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_TEXT}:generateContent?key=${API_KEY}`;
+            // Remove the ?key parameter from the URL string
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_TEXT}:generateContent`;
             let retries = 5;
             let delay = 1000;
 
@@ -389,10 +362,20 @@
                 try {
                     const response = await fetch(url, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            // Pass the AQ key securely in the header instead
+                            'x-goog-api-key': API_KEY 
+                        },
                         body: JSON.stringify(payload)
                     });
-                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    
+                    if (!response.ok) {
+                        const errText = await response.text();
+                        console.error("API Error Details:", errText);
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
                     const data = await response.json();
                     return JSON.parse(data.candidates[0].content.parts[0].text);
                 } catch (error) {
